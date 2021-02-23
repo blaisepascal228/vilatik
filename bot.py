@@ -12,7 +12,6 @@ class Bot(commands.Bot):
         super().__init__(irc_token='oauth:vb3vwsguxb24oupn6w483o6x32szxx', client_id=None, nick='bot_vilat', prefix='!',
                          initial_channels=['gruccv'])
 
-    # Events don't need decorators when subclassed
     async def event_ready(self):
         print(f'Ready | {self.nick}')
 
@@ -22,18 +21,11 @@ class Bot(commands.Bot):
             return
         await self.handle_commands(message)
 
-        if ((message.author.name.lower() == 'pascalblaise') and (len(message.content) > 3)):
+        if ((message.author.name.lower() == 'ник анонимера') and (len(message.content) > 45)):
             if (random.random() < 0.3):
                 await message.channel.send(random.choice(haha))
             else:
                 await message.channel.send(message.content)
-
-    # Commands use a decorator...
-
-    @commands.command(name='test')
-    async def my_command(self, ctx):
-        await ctx.send(f'Hello {ctx.author.name}!')
-
 
 bot = Bot()
 bot.run()
