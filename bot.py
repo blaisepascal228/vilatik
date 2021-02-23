@@ -21,7 +21,7 @@ class Bot(commands.Bot):
             return
         await self.handle_commands(message)
 
-        if ((message.author.name.lower() == 'anonimer22215536') and (len(message.content) > 45)):
+        if ((message.author.name.lower() == 'anonimer22215546') and (len(message.content) > 45)):
             if (random.random() < 0.3):
                 await message.channel.send(random.choice(haha))
             else:
