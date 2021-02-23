@@ -1,11 +1,17 @@
 from twitchio.ext import commands
 import random
 import pyimgur
+import os
+from datetime import datetime
+
+random.seed(datetime.now())
+
+DIR = '' # путь до папки со скринами C:\\bot\\img  именно по два слеша!!!
+CLIENT_ID = "77068d52275409d"
+im = pyimgur.Imgur(CLIENT_ID)
 
 haha = ['1352131312312412131213', ':)', ':D',
         '69090789789787979', 'авыолщвщалвзщав', 'хаххвхвхвхх']
-
-
 class Bot(commands.Bot):
 
     def __init__(self):
@@ -26,6 +32,13 @@ class Bot(commands.Bot):
                 await message.channel.send(random.choice(haha))
             else:
                 await message.channel.send(message.content)
+                
+    @commands.command(name='screen')
+    async def my_command(self, ctx):
+        PATH = os.path.join(DIR, random.choice(os.listdir(DIR)))
+        uploaded_image = im.upload_image(PATH, title="Uploaded with PyImgur")
+        await ctx.send(uploaded_image.link)         
 
 bot = Bot()
 bot.run()
+
